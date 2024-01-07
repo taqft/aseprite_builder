@@ -1,3 +1,5 @@
+[![Build and deploy Aseprite](https://github.com/taqft/aseprite_builder/actions/workflows/aseprite_build_deploy.yml/badge.svg)](https://github.com/taqft/aseprite_builder/actions/workflows/aseprite_build_deploy.yml)
+
 # What is it
 Automated workflow for GitHub Actions which builds Aseprite for Windows, Linux, macOS.</br>
 By using GitHub actions there is no need for manual compilation and it does not contain malware.</br>
