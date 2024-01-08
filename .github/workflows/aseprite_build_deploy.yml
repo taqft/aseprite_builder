@@ -34,7 +34,7 @@ jobs:
         echo "EOF" >> $GITHUB_OUTPUT
     - name: Load version from cache
       id: version_check
-      uses: actions/cache@v3
+      uses: actions/cache@v3.3.2
       with:
         path: ${{ steps.version_info.outputs.latest_tag }}.txt
         key: cached_version
@@ -45,7 +45,7 @@ jobs:
     - name: Create Release
       id: create_release
       if: steps.should_build.outputs.should_build
-      uses: actions/create-release@v1
+      uses: actions/create-release@v1.1.4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -67,7 +67,7 @@ jobs:
     steps:
       - name: (Windows) Install dependencies
         if: matrix.os == 'windows-latest'
-        uses: seanmiddleditch/gha-setup-ninja@v3
+        uses: seanmiddleditch/gha-setup-ninja@v4
       - name: (Ubuntu) Install dependencies
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt install -y cmake ninja-build libxcursor-dev libxi-dev libgl1-mesa-dev
@@ -76,7 +76,7 @@ jobs:
         run: brew install ninja p7zip
       - name: Get Skia from cache
         id: skia-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v3.3.2
         with:
           path: skia
           key: skia-${{ matrix.os }}-cache
@@ -129,7 +129,7 @@ jobs:
         working-directory: aseprite/build/bin
         run: 7z -tzip a Aseprite-${{ needs.check-version.outputs.latest_tag }}-${{ runner.os }}.zip *
       - name: Upload release
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.02
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
